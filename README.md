@@ -2,6 +2,8 @@
 ---
 https://github.com/Prinzhorn/skrollr
 
+https://github.com/Prinzhorn/skrollr/tree/master/examples#examples
+
 ```
 <script type="text/javascript" src="skrollr.min.js"></script>
 <script type="text/javascript">
