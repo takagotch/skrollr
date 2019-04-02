@@ -99,3 +99,117 @@ var offset = s.relativeToAbsolute(document.getElementById('foo'), 'top', 'bottom
 }
 ```
 
+```js
+// skrollr/exs/scripts/main.js
+require.config({
+  baseUrl: "../dist",
+  paths: {
+    'skrollr' : "skrollr.min"
+  },
+  waitSeconds: 15
+});
+
+require(['skrollr'], function(skrollr){
+  var s = skrollr.init({
+    edgeStrategy: 'set',
+    easing: {
+      WTF: Math.random,
+      inverted: function(p) {
+        return 1-p;
+      }
+    }
+  });
+});
+
+// src/skrollr.js
+(function(window, document, undefined) {
+  'use strict';
+  
+  var skrollr = {
+    get: function() {
+      return _instance;
+    },
+    init: function(options) {
+      return _instance || new Skrollr(options);
+    },
+    VERSION: '0.6.30'
+  };
+  
+  var hasProp = Object.prototype.hasProperty;
+  var Math = window.Math;
+  var getStyle = window.getComputedStyle;
+  
+  var documentElement;
+  var body;
+  
+  var EVENT_TOUCHSTART = 'touchstart';
+  var EVENT_TOUCHMOVE = 'touchmove';
+  var EVENT_TOUCHCHANCEL = 'touchcancel';
+  var EVENT_TOUCHEND = 'touchend';
+  
+  
+  
+  var _instance;
+  
+  var _skrollables;
+  
+  var _skrollrBody;
+  
+  var _listeners;
+  var _forceHeight;
+  var _maxKeyFrame = 0;
+  
+  var _scale = 1;
+  var _constants;
+  
+  var _mobileDeceleration;
+  
+  var _direction = 'down';
+  
+  var _lastTop = -1;
+  
+  var _lastRenderCall = _now();
+  
+  var _lastViewportWidth = 0;
+  var _lastViewportHeight = 0;
+  
+  var _requestReflow = false;
+  
+  var _scrollAnimation;
+  
+  var _smoothScrollingEnabled;
+  
+  var _smoothScrollingDuration;
+  
+  var _smoothScrolling;
+  
+  var _forceRender;
+  
+  var _skrollableIdCounter = 0;
+  
+  var _edgeStrategy;
+  
+  var _isMobile = false;
+  
+  var _movileOffset = 0;
+  
+  var _translateZ;
+  
+  var _reigsterdEvents = [];
+  
+  var _animFrame;
+  
+  if(typeof define === 'function' && define.amd) {
+    define([], function() {
+      return skrollr;
+    });
+  } else if (typeof module !== 'undefined' && module.exports) {
+    module.exports = skrollr;
+  } else {
+    window.skrollr = skrollr;
+  }
+  
+})(window, document);
+
+```
+
